@@ -1,31 +1,25 @@
 body {
     font-family: "Comic sans MS";
-    color: #b38dff;
+    color: #80e211;
     background-color: #4a0f56;
-    text-align: center
-}
-h1 {
-    color: #a635d5
+    text-align: center;
+    font-weight: 1000
 }
 
 img {
-    border: 10px solid #808080;
+    border: 10px solid #80e211;
     margin: 10px;
     padding: 10px
 }
 
-button {
-    color: #040404;
-    background: #a635d5;
+a {
+    color: #ffffff
 }
 
-.submitButton {
-    background: #0066A2;
-	color: orange;
-	border-style: outset;
-	border-color: #0066A2;
-	height: 50px;
-	width: 100px;
-	font: bold15px arial,sans-serif;
-	text-shadow: none;
+button {
+    background-color: #c92626;
+    font-family: "Comic sans MS";
+    font-weight: 1000;
+    
 }
+
