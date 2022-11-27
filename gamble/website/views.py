@@ -9,6 +9,7 @@ def goToLogin(request):
     return render(request, "website/login.html")
 
 def doLogin(request):
+
     if Player.objects.filter(name=request.POST['username'],password=request.POST['password']).exists():
         request.session['username'] = request.POST['username']
         request.session['password'] = request.POST['password']
@@ -20,7 +21,23 @@ def goToCreateUser(request):
     return render(request, "website/createUser.html")
 
 def createUser(request):
-    if not Player.objects.filter(name=request.POST['username']).exists():
+    exists = False
+    hasSpace = False
+    lengthLessThanThree = False
+    if " " in str(request.POST['username']):
+        hasSpace = True
+    if Player.objects.filter(name=request.POST['username']).exists():
+        exists = True
+    if len(request.POST['username']) < 3:
+        lengthLessThanThree = True
+
+    if exists:
+        return render(request, "website/error.html", {'message': 'Player already exists.', 'return':'', 'goTo':'login page'})
+    elif hasSpace:
+        return render(request, "website/error.html", {'message': 'Username cannot contain space', 'return': '', 'goTo': 'login page'})
+    elif lengthLessThanThree:
+        return render(request, "website/error.html", {'message': 'Username has to be more than 2 characters', 'return': '', 'goTo': 'login page'})
+    else:
         newUser = Player()
         newUser.name = request.POST['username']
         newUser.password = request.POST['password']
@@ -28,11 +45,6 @@ def createUser(request):
         newUser.save()
         return redirect('/')
 
-    elif len(request.POST['username']) < 3:
-        return render(request, "website/error.html", {'message': 'Username has to be longer than 3 letters', 'return':'', 'goTo':'login page'})
-
-    elif Player.objects.filter(name=request.POST['username']).exists():
-        return render(request, "website/error.html", {'message': 'Username already taken', 'return':'', 'goTo':'login page'})
 
 def lobby(request):
     username = request.session['username']

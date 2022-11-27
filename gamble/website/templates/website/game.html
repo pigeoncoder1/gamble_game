@@ -5,7 +5,7 @@
 {% block content %}
 
     <h1>{{name}} versus ?</h1>
-    <h1> choose option: </h1>
+    <h1> CHOOSE OPTION: </h1>
     <form action="checkHaveCoins" method="post">
         {% csrf_token %}
         <input type="radio" name="choice" value="Bux" id="Bux" checked>
